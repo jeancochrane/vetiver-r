@@ -157,12 +157,12 @@ api_spec <- function(spec, vetiver_model, path, all_docs = TRUE) {
         summary <- glue_spec_summary(ptype)
     }
 
+    spec <- update_spec(spec, path, summary, request_body)
+
     if (all_docs) {
         endpoints <- map_chr(spec$paths, names)
         endpoints <- names(endpoints[endpoints == "post"])
         endpoints <- setdiff(endpoints, path)
-
-        spec <- update_spec(spec, path, summary, request_body)
 
         for (endpoint in endpoints) {
             endpoint_summary <- glue_spec_summary(ptype, endpoint)
